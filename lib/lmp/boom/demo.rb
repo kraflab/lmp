@@ -52,12 +52,21 @@ module LMP
         sr50_count = 0
         moving_count = 0
         total_count = 0
+        run_hist = {}
+        strafe_hist = {}
+        turn_hist = {}
 
         frames.each do |frame|
           total_count += 1
           moving_count += 1 if frame.moving?
           sr40_count += 1 if frame.sr40?
           sr50_count += 1 if frame.sr50?
+          run_hist[frame.run] ||= 0
+          run_hist[frame.run] += 1
+          strafe_hist[frame.strafe] ||= 0
+          strafe_hist[frame.strafe] += 1
+          turn_hist[frame.turn] ||= 0
+          turn_hist[frame.turn] += 1
         end
 
         puts <<~EOF
@@ -65,6 +74,27 @@ module LMP
           SR50: #{100 * sr50_count / moving_count} %
           Move: #{100 * moving_count / total_count} %
         EOF
+
+        puts ''
+
+        puts 'Run Histogram:'
+        run_hist.sort.each do |k, v|
+          puts "  #{k.to_s.rjust(3)}: #{v}"
+        end
+
+        puts ''
+
+        puts 'Strafe Histogram:'
+        strafe_hist.sort.each do |k, v|
+          puts "  #{k.to_s.rjust(3)}: #{v}"
+        end
+
+        puts ''
+
+        puts 'Turn Histogram:'
+        turn_hist.sort.each do |k, v|
+          puts "  #{k.to_s.rjust(4)}: #{v}"
+        end
       end
 
       private
