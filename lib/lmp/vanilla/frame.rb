@@ -1,5 +1,5 @@
 module LMP
-  module Boom
+  module Vanilla
     class Frame
       attr_reader :run, :strafe, :turn, :events
 
@@ -23,8 +23,16 @@ module LMP
         run.abs == 50 && strafe.abs == 40
       end
 
+      def sr45?
+        run.abs == 50 && strafe.abs > 40 && strafe.abs < 50
+      end
+
       def sr50?
         run.abs == 50 && strafe.abs == 50
+      end
+
+      def turning?
+        turn != 0
       end
 
       private

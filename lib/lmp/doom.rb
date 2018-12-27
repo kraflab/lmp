@@ -1,7 +1,7 @@
-require_relative 'boom/demo'
+require_relative 'doom/demo'
 
 module LMP
-  module Boom
+  module Doom
     extend self
 
     def read(filename)
