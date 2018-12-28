@@ -11,6 +11,8 @@ module LMP
 
       def details
         puts <<~EOF
+          Details:
+
           Version: #{version}
           Compatibility: #{compatibility}
           Skill: #{skill}
@@ -37,32 +39,30 @@ module LMP
 
       private
 
-      def parse_file(file)
-        @version = file.getbyte
+      def parse_details(file)
+        parse_boom_details(file)
+        file.read(50) # unused
+      end
+
+      def parse_boom_details(file)
         validate_signature(file)
-        @compatibility = file.getbyte
-        @skill = file.getbyte + 1
-        @episode = file.getbyte
-        @level = file.getbyte
-        @play_mode = read_play_mode(file)
-        @console_player = file.getbyte
+        @compatibility     = file.getbyte
+        @skill             = file.getbyte + 1
+        @episode           = file.getbyte
+        @level             = file.getbyte
+        @play_mode         = read_play_mode(file)
+        @console_player    = file.getbyte
         @monsters_remember = file.getbyte
         @variable_friction = file.getbyte
-        @weapon_recoil = file.getbyte
-        @allow_pushers = file.getbyte
-        file.getbyte # unused
-        @player_bob = file.getbyte
-        @respawn = file.getbyte
-        @fast = file.getbyte
-        @nomonsters = file.getbyte
-        @demo_insurance = file.getbyte
-        @seed = read_seed(file)
-        file.read(50) # unused
-        @player_1 = file.getbyte
-        @player_2 = file.getbyte
-        @player_3 = file.getbyte
-        @player_4 = file.getbyte
-        parse_frames(file)
+        @weapon_recoil     = file.getbyte
+        @allow_pushers     = file.getbyte
+        @point_of_view     = file.getbyte
+        @player_bob        = file.getbyte
+        @respawn           = file.getbyte
+        @fast              = file.getbyte
+        @nomonsters        = file.getbyte
+        @demo_insurance    = file.getbyte
+        @seed              = read_seed(file)
       end
 
       def validate_signature(file)
