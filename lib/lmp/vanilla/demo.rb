@@ -42,12 +42,10 @@ module LMP
           turn_hist[frame.turn.abs] += 1
         end
 
-        puts <<~EOF
-          SR40: #{(100 * sr40_count / moving_count).to_s.rjust(3)} %
-          SR50: #{(100 * sr50_count / moving_count).to_s.rjust(3)} %
-          SR45: #{(100 * sr45_count / moving_count).to_s.rjust(3)} %
-          SR:   #{(100 * (sr40_count + sr50_count + sr45_count) / moving_count).to_s.rjust(3)} %
-        EOF
+        puts "SR40: #{(100 * sr40_count / moving_count).to_s.rjust(3)} %"
+        puts "SR50: #{(100 * sr50_count / moving_count).to_s.rjust(3)} %"
+        puts "SR45: #{(100 * sr45_count / moving_count).to_s.rjust(3)} %" if (100 * sr45_count / moving_count) > 0
+        puts "SR:   #{(100 * (sr40_count + sr50_count + sr45_count) / moving_count).to_s.rjust(3)} %"
 
         puts ''
 
