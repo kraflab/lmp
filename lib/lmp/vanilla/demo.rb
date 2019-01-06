@@ -1,5 +1,6 @@
 require_relative 'frame'
 require_relative 'statistics_presenter'
+require_relative 'frames_presenter'
 
 module LMP
   module Vanilla
@@ -22,6 +23,10 @@ module LMP
 
       def statistics
         StatisticsPresenter.call(self)
+      end
+
+      def dump_frames
+        FramesPresenter.call(self)
       end
 
       private

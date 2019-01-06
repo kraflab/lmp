@@ -5,6 +5,7 @@ module LMP
     def initialize(args)
       @print_details = false
       @print_statistics = false
+      @dump_frames = false
       parse(args)
     end
 
@@ -14,6 +15,10 @@ module LMP
 
     def print_statistics?
       @print_statistics
+    end
+
+    def dump_frames?
+      @dump_frames
     end
 
     private
@@ -30,6 +35,12 @@ module LMP
       end
     end
 
+    def dump_frames_option(parser)
+      parser.on('--dump-frames', 'Dump demo frames') do
+        @dump_frames = true
+      end
+    end
+
     def help_option(parser)
       parser.on('-h', '--help', 'Print this help') do
         puts parser
@@ -42,6 +53,7 @@ module LMP
         parser.banner = "Usage: parse_lmp.rb [options] file"
         print_details_option(parser)
         print_statistics_option(parser)
+        dump_frames_option(parser)
         help_option(parser)
       end.parse!(args)
     end
