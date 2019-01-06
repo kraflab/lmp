@@ -3,6 +3,8 @@ require_relative 'lmp/vanilla/demo'
 require_relative 'lmp/boom'
 require_relative 'lmp/mbf'
 require_relative 'lmp/doom'
+require_relative 'lmp/options'
+require_relative 'lmp/presenter'
 
 module LMP
   ENGINE = {
@@ -18,11 +20,3 @@ module LMP
     ENGINE[engine].read(filename)
   end
 end
-
-filename = ARGV[0]
-print_details = ARGV[1]
-demo = LMP.read(filename)
-
-puts "#{filename}:\n\n"
-demo.details if print_details
-demo.statistics

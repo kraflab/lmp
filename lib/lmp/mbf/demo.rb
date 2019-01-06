@@ -1,32 +1,23 @@
+require_relative 'details_presenter'
+
 module LMP
   module MBF
     class Demo < Boom::Demo
-      def details
-        puts <<~EOF
-          Details:
+      attr_reader :monster_infighting, :player_helpers, :classic_bfg,
+                  :beta_emulation, :friend_distance, :monster_backing,
+                  :monster_avoid_hazards, :monster_friction, :help_friends,
+                  :dog_jumping, :climb_steep_stairs, :comp_telefrag,
+                  :comp_dropoff, :comp_vil, :comp_pain, :comp_skull,
+                  :comp_blazing, :comp_doorlight, :comp_model, :comp_god,
+                  :comp_falloff, :comp_floors, :comp_skymap, :comp_pursuit,
+                  :comp_doorstuck, :comp_staylift, :comp_zombie, :comp_stairs,
+                  :comp_infcheat, :comp_zerotags, :comp_moveblock,
+                  :comp_respawn, :comp_sound, :comp_666, :comp_soul,
+                  :comp_maskedanim, :comp_ouchface, :comp_maxhealth,
+                  :comp_translucency
 
-          Version: #{version}
-          Compatibility: #{compatibility}
-          Skill: #{skill}
-          Episode: #{episode}
-          Level: #{level}
-          Play Mode: #{play_mode}
-          Console Player: #{console_player}
-          Monsters Remember: #{monsters_remember}
-          Variable Friction: #{variable_friction}
-          Weapon Recoil: #{weapon_recoil}
-          Allow Pushers: #{allow_pushers}
-          Player Bob: #{player_bob}
-          Respawn: #{respawn}
-          Fast: #{fast}
-          NoMonsters: #{nomonsters}
-          Demo Insurance: #{demo_insurance}
-          Seed: #{seed}
-          Player 1: #{player_1}
-          Player 2: #{player_2}
-          Player 3: #{player_3}
-          Player 4: #{player_4}
-        EOF
+      def details
+        DetailsPresenter.call(self)
       end
 
       private

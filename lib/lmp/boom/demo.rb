@@ -1,3 +1,5 @@
+require_relative 'details_presenter'
+
 module LMP
   module Boom
     class Demo
@@ -10,31 +12,7 @@ module LMP
                   :player_bob, :demo_insurance, :seed
 
       def details
-        puts <<~EOF
-          Details:
-
-          Version: #{version}
-          Compatibility: #{compatibility}
-          Skill: #{skill}
-          Episode: #{episode}
-          Level: #{level}
-          Play Mode: #{play_mode}
-          Console Player: #{console_player}
-          Monsters Remember: #{monsters_remember}
-          Variable Friction: #{variable_friction}
-          Weapon Recoil: #{weapon_recoil}
-          Allow Pushers: #{allow_pushers}
-          Player Bob: #{player_bob}
-          Respawn: #{respawn}
-          Fast: #{fast}
-          NoMonsters: #{nomonsters}
-          Demo Insurance: #{demo_insurance}
-          Seed: #{seed}
-          Player 1: #{player_1}
-          Player 2: #{player_2}
-          Player 3: #{player_3}
-          Player 4: #{player_4}
-        EOF
+        DetailsPresenter.call(self)
       end
 
       private
