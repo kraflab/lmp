@@ -5,6 +5,7 @@ require_relative 'lmp/mbf'
 require_relative 'lmp/doom'
 require_relative 'lmp/options'
 require_relative 'lmp/presenter'
+require_relative 'lmp/statistics'
 
 module LMP
   ENGINE = {
