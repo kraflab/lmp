@@ -1,6 +1,6 @@
 module LMP
   module Statistics
-    class Pauses
+    class Pauses < Base
       def initialize
         @pauses = 0
       end
@@ -10,13 +10,7 @@ module LMP
       end
 
       def print
-        puts "Pauses:         #{pauses_string}"
-      end
-
-      private
-
-      def pauses_string
-        @pauses == 0 ? 'None' : @pauses
+        puts "Pauses:         #{none_or_value(@pauses)}"
       end
     end
   end

@@ -1,3 +1,4 @@
+require_relative 'statistics/base'
 require_relative 'statistics/turn_frequency'
 require_relative 'statistics/straferun_frequency'
 require_relative 'statistics/turbo'

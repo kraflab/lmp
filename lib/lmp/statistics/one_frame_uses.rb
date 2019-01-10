@@ -1,6 +1,6 @@
 module LMP
   module Statistics
-    class OneFrameUses
+    class OneFrameUses < Base
       def initialize
         @one_frame_uses = 0
         @use_history = []
@@ -16,17 +16,13 @@ module LMP
       end
 
       def print
-        puts "One Frame Uses: #{one_frame_uses_string}"
+        puts "One Frame Uses: #{none_or_value(@one_frame_uses)}"
       end
 
       private
 
       def one_frame_use?(frame)
         !@use_history[0] && @use_history[1] && !frame.use
-      end
-
-      def one_frame_uses_string
-        @one_frame_uses == 0 ? 'None' : @one_frame_uses
       end
     end
   end
