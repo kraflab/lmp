@@ -15,7 +15,23 @@ module LMP
     extend self
 
     def analyze(demo, options)
-      statistic_blocks = [
+      statistic_blocks = new_statistics_blocks
+      analyze_demo(demo, options, statistic_blocks)
+      statistic_blocks
+    end
+
+    private
+
+    def analyze_demo(demo, options, statistic_blocks)
+      demo.frames.each do |frame|
+        statistic_blocks.each do |statistics|
+          statistics.each { |s| s.analyze_frame(frame) }
+        end
+      end
+    end
+
+    def new_statistics_blocks
+      [
         [
           Statistics::StraferunFrequency.new
         ],
@@ -39,14 +55,6 @@ module LMP
           Statistics::SuddenTurns.new
         ]
       ]
-
-      demo.frames.each do |frame|
-        statistic_blocks.each do |statistics|
-          statistics.each { |s| s.analyze_frame(frame) }
-        end
-      end
-
-      statistic_blocks
     end
   end
 end
