@@ -9,6 +9,7 @@ require_relative 'statistics/sudden_turns'
 require_relative 'statistics/average_turn_speed'
 require_relative 'statistics/one_frame_uses'
 require_relative 'statistics/pauses'
+require_relative 'statistics/saves'
 
 module LMP
   module Statistics
@@ -46,7 +47,8 @@ module LMP
           Statistics::Stroller.new,
           Statistics::SR50OnTurns.new,
           Statistics::OneFrameUses.new,
-          Statistics::Pauses.new
+          Statistics::Pauses.new,
+          Statistics::Saves.new
         ],
         [
           Statistics::OneFrameTurns.new
