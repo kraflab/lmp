@@ -13,7 +13,6 @@ module LMP
       end
 
       def print
-        puts ''
         puts 'Turn Frequency:'
         @turning_histogram.delete(0)
         @turning_histogram.sort.each do |k, v|

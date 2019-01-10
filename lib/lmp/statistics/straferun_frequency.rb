@@ -22,7 +22,6 @@ module LMP
       end
 
       def print
-        puts ''
         puts "SR40: #{(100 * @sr40_count / @moving_count).to_s.rjust(3)} %"
         puts "SR50: #{(100 * @sr50_count / @moving_count).to_s.rjust(3)} %"
         puts "SR45: #{(100 * @sr45_count / @moving_count).to_s.rjust(3)} %" if (100 * @sr45_count / @moving_count) > 0

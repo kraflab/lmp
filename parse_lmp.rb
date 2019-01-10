@@ -8,9 +8,9 @@ module ParseLMP
     filenames = args
     filenames.each do |filename|
       demo = LMP.read(filename)
-      statistics = LMP::Statistics.analyze(demo, options)
+      statistic_blocks = LMP::Statistics.analyze(demo, options)
       puts '--- START ---'
-      LMP::Presenter.call(demo, statistics, options)
+      LMP::Presenter.call(demo, statistic_blocks, options)
       puts '--- END ---'
     end
   end

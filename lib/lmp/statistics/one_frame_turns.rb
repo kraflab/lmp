@@ -19,7 +19,6 @@ module LMP
       end
 
       def print
-        puts ''
         puts 'One Frame Turns:'
         puts '  None' unless @one_frame_turns.size > 0
         @one_frame_turns.sort.each do |k, v|

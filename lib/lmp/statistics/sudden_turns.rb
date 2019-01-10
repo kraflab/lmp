@@ -29,7 +29,6 @@ module LMP
       end
 
       def print
-        puts ''
         puts 'Sudden Turns:'
         puts '  None' unless @sudden_turns.size > 0
         @sudden_turns.sort.each do |k, v|

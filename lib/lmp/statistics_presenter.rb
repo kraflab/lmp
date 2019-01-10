@@ -2,11 +2,26 @@ module LMP
   module StatisticsPresenter
     extend self
 
-    def call(statistics)
-      puts '--------'
-      puts 'Statistics:'
+    def call(statistic_blocks)
+      print_statistics_header
+      print_statistic_blocks(statistic_blocks)
+    end
 
-      statistics.each(&:print)
+    private
+
+    def print_statistics_header
+      puts <<~EOF
+        --------
+        Statistics:
+
+      EOF
+    end
+
+    def print_statistic_blocks(statistic_blocks)
+      statistic_blocks.each do |statistics|
+        statistics.each(&:print)
+        puts ''
+      end
     end
   end
 end
