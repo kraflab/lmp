@@ -16,9 +16,6 @@ module LMP
           Statistics::StraferunFrequency.new
         ],
         [
-          Statistics::StraferunFrequency.new
-        ],
-        [
           Statistics::TurnFrequency.new
         ],
         [
