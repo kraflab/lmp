@@ -4,16 +4,17 @@ module LMP
       extend self
 
       def call(demo)
-        puts 'Run Strafe Turn Pause Save Fire Use Weapon'
-        demo.frames.each do |frame|
-          puts dump(frame)
+        puts 'Frame Run Strafe Turn Pause Save Fire Use Weapon'
+        demo.frames.each_with_index do |frame, index|
+          puts dump(frame, index)
         end
       end
 
       private
 
-      def dump(frame)
+      def dump(frame, index)
         [
+          index,
           frame.run,
           frame.strafe,
           frame.turn,
