@@ -24,19 +24,19 @@ module LMP
     private
 
     def print_details_option(parser)
-      parser.on('--print-details', 'Print demo (header) details') do
+      parser.on('-d', '--print-details', 'Print demo (header) details') do
         @print_details = true
       end
     end
 
     def print_statistics_option(parser)
-      parser.on('--print-statistics', 'Print demo statistics') do
+      parser.on('-s', '--print-statistics', 'Print demo statistics') do
         @print_statistics = true
       end
     end
 
     def dump_frames_option(parser)
-      parser.on('--dump-frames', 'Dump demo frames') do
+      parser.on('-f', '--dump-frames', 'Dump demo frames') do
         @dump_frames = true
       end
     end
@@ -48,12 +48,20 @@ module LMP
       end
     end
 
+    def explain_statistics_option(parser)
+      parser.on('-x', '--explain-statistics', 'Explain statistics') do
+        LMP::ExplainStatistics.call
+        exit
+      end
+    end
+
     def parse(args)
       OptionParser.new do |parser|
         parser.banner = "Usage: parse_lmp.rb [options] file [file2 ...]"
         print_details_option(parser)
         print_statistics_option(parser)
         dump_frames_option(parser)
+        explain_statistics_option(parser)
         help_option(parser)
       end.parse!(args)
     end
