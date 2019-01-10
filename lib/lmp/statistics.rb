@@ -6,6 +6,7 @@ require_relative 'statistics/sr50_on_turns'
 require_relative 'statistics/one_frame_turns'
 require_relative 'statistics/sudden_turns'
 require_relative 'statistics/average_turn_speed'
+require_relative 'statistics/one_frame_uses'
 
 module LMP
   module Statistics
@@ -20,12 +21,13 @@ module LMP
           Statistics::TurnFrequency.new
         ],
         [
-          Statistics::Turbo.new,
-          Statistics::Stroller.new,
-          Statistics::SR50OnTurns.new
+          Statistics::AverageTurnSpeed.new
         ],
         [
-          Statistics::AverageTurnSpeed.new
+          Statistics::Turbo.new,
+          Statistics::Stroller.new,
+          Statistics::SR50OnTurns.new,
+          Statistics::OneFrameUses.new
         ],
         [
           Statistics::OneFrameTurns.new

@@ -10,7 +10,7 @@ module LMP
       end
 
       def print
-        puts "Turbo:         #{@turbo}"
+        puts "Turbo:          #{@turbo}"
       end
     end
   end
