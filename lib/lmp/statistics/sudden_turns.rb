@@ -1,7 +1,7 @@
 module LMP
   module Statistics
     class SuddenTurns
-      IGNORE_LIMIT = 4
+      IGNORE_LIMIT = 9
       IGNORE_FRAMES = 2
 
       def initialize

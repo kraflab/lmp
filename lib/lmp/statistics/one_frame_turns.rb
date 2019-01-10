@@ -1,7 +1,7 @@
 module LMP
   module Statistics
     class OneFrameTurns
-      IGNORE_LIMIT = 4
+      IGNORE_LIMIT = 9
 
       def initialize
         @one_frame_turns = {}
