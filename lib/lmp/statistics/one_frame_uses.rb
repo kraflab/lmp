@@ -3,10 +3,12 @@ module LMP
     class OneFrameUses < Base
       def initialize
         @one_frame_uses = 0
+        @use_count = 0
         @use_history = []
       end
 
       def analyze_frame(frame)
+        @use_count += 1 if frame.use
         @use_history << frame.use
 
         return if @use_history.length < 3
@@ -16,7 +18,7 @@ module LMP
       end
 
       def print
-        puts "One Frame Uses: #{none_or_value(@one_frame_uses)}"
+        puts "One Frame Uses: #{none_or_value(@one_frame_uses)} / #{@use_count}"
       end
 
       private
