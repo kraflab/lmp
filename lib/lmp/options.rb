@@ -50,7 +50,7 @@ module LMP
 
     def parse(args)
       OptionParser.new do |parser|
-        parser.banner = "Usage: parse_lmp.rb [options] file"
+        parser.banner = "Usage: parse_lmp.rb [options] file [file2 ...]"
         print_details_option(parser)
         print_statistics_option(parser)
         dump_frames_option(parser)
