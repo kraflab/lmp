@@ -6,7 +6,7 @@ module LMP
       end
 
       def analyze_frame(frame)
-        @saves += 1 if frame.pause
+        @saves += 1 if frame.save
       end
 
       def print
