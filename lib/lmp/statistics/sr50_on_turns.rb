@@ -10,7 +10,7 @@ module LMP
       end
 
       def print
-        puts "SR50 On Turns:  #{@sr50_on_turns}"
+        puts "SR50 On Turns:   #{@sr50_on_turns}"
       end
     end
   end

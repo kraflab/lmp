@@ -10,7 +10,7 @@ module LMP
       end
 
       def print
-        puts "Stroller:       #{@stroller}"
+        puts "Stroller:        #{@stroller}"
       end
     end
   end

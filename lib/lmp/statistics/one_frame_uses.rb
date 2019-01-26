@@ -18,7 +18,7 @@ module LMP
       end
 
       def print
-        puts "One Frame Uses: #{none_or_value(@one_frame_uses)} / #{@use_count}"
+        puts "One Frame Uses:  #{none_or_value(@one_frame_uses)} / #{@use_count}"
       end
 
       private

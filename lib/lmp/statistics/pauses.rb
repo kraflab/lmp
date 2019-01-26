@@ -10,7 +10,7 @@ module LMP
       end
 
       def print
-        puts "Pauses:         #{none_or_value(@pauses)}"
+        puts "Pauses:          #{none_or_value(@pauses)}"
       end
     end
   end

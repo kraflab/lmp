@@ -56,6 +56,9 @@ module LMP
           This is possible in normal play and cannot be considered suspect,
           unless the fraction compared to all use frames is high.
 
+        One Frame Fires:
+          This is the same as One Frame Uses, but for firing.
+
         Pauses:
           Number of times the demo was paused while recording. This does not
           capture the opening of the menu.

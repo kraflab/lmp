@@ -10,7 +10,7 @@ module LMP
       end
 
       def print
-        puts "Saves:          #{none_or_value(@saves)}"
+        puts "Saves:           #{none_or_value(@saves)}"
       end
     end
   end
