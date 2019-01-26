@@ -59,6 +59,9 @@ module LMP
         One Frame Fires:
           This is the same as One Frame Uses, but for firing.
 
+        One Frame Swaps:
+          This is the same as One Frame Uses, but for weapon swaps.
+
         Pauses:
           Number of times the demo was paused while recording. This does not
           capture the opening of the menu.
