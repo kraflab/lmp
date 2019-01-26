@@ -12,12 +12,12 @@ module LMP
       end
 
       def analyze_frame(frame)
-        @use_count += 1 if frame.use
         @use_history << frame.use
 
         return if @use_history.length < 3
 
         @one_frame_uses += 1 if one_frame_use?(frame)
+        @use_count += 1 if @use_history[1] && !frame.use
         @use_history.shift
       end
 

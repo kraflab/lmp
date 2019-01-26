@@ -12,12 +12,12 @@ module LMP
       end
 
       def analyze_frame(frame)
-        @swap_count += 1 if frame.weapon
         @swap_history << frame.weapon
 
         return if @swap_history.length < 3
 
         @one_frame_swaps += 1 if one_frame_swap?(frame)
+        @swap_count += 1 if @swap_history[1] && !frame.weapon
         @swap_history.shift
       end
 

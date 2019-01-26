@@ -12,12 +12,12 @@ module LMP
       end
 
       def analyze_frame(frame)
-        @fire_count += 1 if frame.fire
         @fire_history << frame.fire
 
         return if @fire_history.length < 3
 
         @one_frame_fires += 1 if one_frame_fire?(frame)
+        @fire_count += 1 if @fire_history[1] && !frame.fire
         @fire_history.shift
       end
 
