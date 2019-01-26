@@ -15,7 +15,7 @@ module LMP
                   :player_3, :player_4, :frames, :filename
 
       def initialize(filename)
-        file = File.open(filename)
+        file = File.open(filename, 'rb')
         @filename = filename
         parse_file(file)
       end
