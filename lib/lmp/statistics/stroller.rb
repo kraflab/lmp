@@ -1,6 +1,6 @@
 module LMP
   module Statistics
-    class Stroller
+    class Stroller < Base
       def initialize
         @stroller = true
       end

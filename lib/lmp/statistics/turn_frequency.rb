@@ -1,6 +1,6 @@
 module LMP
   module Statistics
-    class TurnFrequency
+    class TurnFrequency < Base
       def initialize
         @turning_count = 0
         @turning_histogram = {}

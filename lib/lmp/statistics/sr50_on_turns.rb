@@ -1,6 +1,6 @@
 module LMP
   module Statistics
-    class SR50OnTurns
+    class SR50OnTurns < Base
       def initialize
         @sr50_on_turns = false
       end

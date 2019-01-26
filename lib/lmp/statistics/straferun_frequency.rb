@@ -1,6 +1,6 @@
 module LMP
   module Statistics
-    class StraferunFrequency
+    class StraferunFrequency < Base
       def initialize
         @sr40_count = 0
         @sr50_count = 0

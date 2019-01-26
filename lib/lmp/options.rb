@@ -6,6 +6,7 @@ module LMP
       @print_details = false
       @print_statistics = false
       @dump_frames = false
+      @aggregate_stats = false
       parse(args)
     end
 
@@ -19,6 +20,10 @@ module LMP
 
     def dump_frames?
       @dump_frames
+    end
+
+    def aggregate_stats?
+      @aggregate_stats
     end
 
     private
@@ -38,6 +43,12 @@ module LMP
     def dump_frames_option(parser)
       parser.on('-f', '--dump-frames', 'Dump demo frames') do
         @dump_frames = true
+      end
+    end
+
+    def aggregate_stats_option(parser)
+      parser.on('-a', '--aggregate-stats', 'Aggregate demo stats') do
+        @aggregate_stats = true
       end
     end
 
@@ -61,6 +72,7 @@ module LMP
         print_details_option(parser)
         print_statistics_option(parser)
         dump_frames_option(parser)
+        aggregate_stats_option(parser)
         explain_statistics_option(parser)
         help_option(parser)
       end.parse!(args)

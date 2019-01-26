@@ -4,6 +4,10 @@ module LMP
       def initialize
         @one_frame_fires = 0
         @fire_count = 0
+        refresh
+      end
+
+      def refresh
         @fire_history = []
       end
 

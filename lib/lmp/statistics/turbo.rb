@@ -1,6 +1,6 @@
 module LMP
   module Statistics
-    class Turbo
+    class Turbo < Base
       def initialize
         @turbo = false
       end

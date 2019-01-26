@@ -4,6 +4,10 @@ module LMP
       def initialize
         @one_frame_uses = 0
         @use_count = 0
+        refresh
+      end
+
+      def refresh
         @use_history = []
       end
 

@@ -1,11 +1,15 @@
 module LMP
   module Statistics
-    class SuddenTurns
+    class SuddenTurns < Base
       IGNORE_LIMIT = 9
       IGNORE_FRAMES = 2
 
       def initialize
         @sudden_turns = {}
+        refresh
+      end
+
+      def refresh
         @last_turn = nil
         @ignore_frames = IGNORE_FRAMES
       end

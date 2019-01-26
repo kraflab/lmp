@@ -16,13 +16,20 @@ module LMP
   module Statistics
     extend self
 
-    def analyze(demo, options)
-      statistic_blocks = new_statistics_blocks
+    def analyze(demo, options, statistic_blocks: nil)
+      statistic_blocks ||= new_statistic_blocks
+      refresh_stats(statistic_blocks)
       analyze_demo(demo, options, statistic_blocks)
       statistic_blocks
     end
 
     private
+
+    def refresh_stats(statistic_blocks)
+      statistic_blocks.each do |statistics|
+        statistics.each { |s| s.refresh }
+      end
+    end
 
     def analyze_demo(demo, options, statistic_blocks)
       demo.frames.each do |frame|
@@ -32,7 +39,7 @@ module LMP
       end
     end
 
-    def new_statistics_blocks
+    def new_statistic_blocks
       [
         [
           Statistics::StraferunFrequency.new

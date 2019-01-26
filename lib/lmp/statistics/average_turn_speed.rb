@@ -1,6 +1,6 @@
 module LMP
   module Statistics
-    class AverageTurnSpeed
+    class AverageTurnSpeed < Base
       def initialize
         @total_turn = 0
         @turns = []
