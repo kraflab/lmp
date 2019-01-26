@@ -1,3 +1,7 @@
 *.lmp
 *.txt
+*.bat
+*.LMP
+*.TXT
+*.BAT
 
