@@ -12,7 +12,7 @@ module LMP
 
       attr_reader :version, :skill, :episode, :level, :play_mode, :respawn,
                   :fast, :nomonsters, :point_of_view, :player_1, :player_2,
-                  :player_3, :player_4, :frames, :filename
+                  :player_3, :player_4, :frames, :filename, :longtics
 
       def initialize(filename)
         file = File.open(filename, 'rb')
@@ -32,6 +32,7 @@ module LMP
 
       def parse_file(file)
         @version = file.getbyte
+        @longtics = longtics?
         parse_details(file)
         parse_players(file)
         parse_frames(file)
@@ -48,7 +49,7 @@ module LMP
         @frames = []
 
         loop do
-          frame = Frame.new(file)
+          frame = Frame.new(file, @longtics)
           break if frame.end_of_frames? || file.eof?
           @frames << frame
         end
@@ -56,6 +57,11 @@ module LMP
 
       def read_play_mode(file)
         PLAY_MODE.fetch(file.getbyte, 'unknown')
+      end
+
+      def longtics?
+        @version == 214 ||
+          (@version > 110 && @version < 200)
       end
     end
   end

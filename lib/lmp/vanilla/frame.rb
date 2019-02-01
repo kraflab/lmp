@@ -4,11 +4,11 @@ module LMP
       attr_reader :run, :strafe, :turn,
                   :event_bits, :pause, :save, :fire, :use, :weapon
 
-      def initialize(file)
+      def initialize(file, longtics)
         @run = get_signed_byte(file)
         return if end_of_frames?
         @strafe = get_signed_byte(file)
-        @turn = get_signed_byte(file)
+        @turn = read_turn(file, longtics)
         @pause = false
         @save = false
         @fire = false
@@ -45,6 +45,11 @@ module LMP
 
       def get_signed_byte(file)
         [file.getbyte].pack('c').unpack('c')[0]
+      end
+
+      def read_turn(file, longtics)
+        file.getbyte if longtics
+        get_signed_byte(file)
       end
 
       def parse_events(file)
