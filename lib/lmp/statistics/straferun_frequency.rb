@@ -22,6 +22,8 @@ module LMP
       end
 
       def print
+        return inapplicable_print if @moving_count == 0
+
         puts "SR40: #{(100 * @sr40_count / @moving_count).to_s.rjust(3)} %"
         puts "SR50: #{(100 * @sr50_count / @moving_count).to_s.rjust(3)} %"
         puts "SR45: #{(100 * @sr45_count / @moving_count).to_s.rjust(3)} %" if (100 * @sr45_count / @moving_count) > 0
@@ -40,6 +42,12 @@ module LMP
         @strafe_histogram.sort.each do |k, v|
           puts "  #{k.to_s.rjust(3)}: #{(v.to_f / @moving_count).round(4)}"
         end
+      end
+
+      private
+
+      def inapplicable_print
+        puts "No run or strafe detected!"
       end
     end
   end
