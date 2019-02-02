@@ -6,7 +6,7 @@ module LMP
       end
 
       def analyze_frame(frame)
-        @sr50_on_turns = true if frame.sr50? && frame.turn != 0
+        @sr50_on_turns = true if frame.sr50? && frame.turn != 0 && !frame.turn180?
       end
 
       def print

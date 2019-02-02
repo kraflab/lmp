@@ -41,6 +41,10 @@ module LMP
         turn != 0
       end
 
+      def turn180?
+        turn == -128
+      end
+
       private
 
       def get_signed_byte(file)
