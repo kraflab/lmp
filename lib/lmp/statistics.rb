@@ -12,6 +12,7 @@ require_relative 'statistics/one_frame_fires'
 require_relative 'statistics/one_frame_swaps'
 require_relative 'statistics/pauses'
 require_relative 'statistics/saves'
+require_relative 'statistics/bad_straferun'
 
 module LMP
   module Statistics
@@ -66,6 +67,9 @@ module LMP
         ],
         [
           Statistics::SuddenTurns.new
+        ],
+        [
+          Statistics::BadStraferun.new
         ]
       ]
     end

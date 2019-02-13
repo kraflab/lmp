@@ -86,6 +86,13 @@ module LMP
           abruptly. A sudden turn *could* indicate a point of segmenting, if the
           demo is joined mid-turn, or if the player is turning while hitting the
           join key. However, it is not definitive in any way.
+
+        Bad Straferun:
+          When trying to execute SR50, the player can accidentally give strafe
+          inputs below 50 (for instance, if using the mouse to strafe). This
+          stat reports the instances this happens, for each strafe value.
+          The total cost is in units of SR50 and is an estimate based on the
+          vector of straferun input on the bad frames.
       EOF
     end
   end
