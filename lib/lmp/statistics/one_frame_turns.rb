@@ -2,6 +2,7 @@ module LMP
   module Statistics
     class OneFrameTurns < Base
       IGNORE_LIMIT = 9
+      IGNORE_FRAMES = 1
 
       def initialize
         @one_frame_turns = {}
@@ -9,6 +10,7 @@ module LMP
       end
 
       def refresh
+        @ignore_frames = IGNORE_FRAMES
         @turn_history = []
       end
 
@@ -16,6 +18,12 @@ module LMP
         @turn_history << frame.turn
 
         return if @turn_history.length < 3
+
+        if @ignore_frames > 0
+          @ignore_frames -= 1
+          @turn_history.shift
+          return
+        end
 
         one_frame_turn!(@turn_history[1]) if one_frame_turn?(frame)
 
