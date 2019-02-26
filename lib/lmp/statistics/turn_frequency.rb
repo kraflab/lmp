@@ -18,7 +18,9 @@ module LMP
         puts 'Turn Frequency:'
         @turning_histogram.delete(0)
         @turning_histogram.sort.each do |k, v|
-          puts "  #{k.to_s.rjust(3)}: #{(v.to_f / @turning_count).round(4)}"
+          frequency = (v.to_f / @turning_count).round(4)
+          frequency = "0.0000 (#{v})" if frequency == 0
+          puts "  #{k.to_s.rjust(3)}: #{frequency}"
         end
       end
 
