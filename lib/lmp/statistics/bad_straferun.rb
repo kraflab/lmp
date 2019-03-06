@@ -1,13 +1,15 @@
 module LMP
   module Statistics
     class BadStraferun < Base
+      BAD_STRAFERUN_RANGE = 3
+
       def initialize
         @bad_straferun = {}
         @cost = 0.0
       end
 
       def analyze_frame(frame)
-        if frame.run.abs == 50 && frame.strafe != 0 && !frame.sr40? && !frame.sr50?
+        if bad_straferun?(frame) && sr50_nearby?(frame)
           @bad_straferun[frame.strafe.abs] ||= 0
           @bad_straferun[frame.strafe.abs] += 1
           @cost += cost(frame.strafe.abs)
@@ -29,6 +31,14 @@ module LMP
       end
 
       private
+
+      def bad_straferun?(frame)
+        frame.run.abs == 50 && frame.strafe != 0 && !frame.sr40? && !frame.sr50?
+      end
+
+      def sr50_nearby?(frame)
+        frame.frame_window(BAD_STRAFERUN_RANGE).any? { |f| f.sr50? }
+      end
 
       def cost(strafe)
         max_input = 70.71 # sr50

@@ -49,7 +49,7 @@ module LMP
         @frames = []
 
         loop do
-          frame = Frame.new(file, @longtics)
+          frame = Frame.new(file, @longtics, @frames.last)
           break if frame.end_of_frames? || file.eof?
           @frames << frame
         end

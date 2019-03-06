@@ -3,8 +3,9 @@ module LMP
     class Frame
       attr_reader :run, :strafe, :turn,
                   :event_bits, :pause, :save, :fire, :use, :weapon
+      attr_writer :next_frame
 
-      def initialize(file, longtics)
+      def initialize(file, longtics, prev_frame)
         @run = get_signed_byte(file)
         return if end_of_frames?
         @strafe = get_signed_byte(file)
@@ -15,6 +16,7 @@ module LMP
         @use = false
         @weapon = false
         parse_events(file)
+        connect_frame(prev_frame)
       end
 
       def end_of_frames?
@@ -45,7 +47,32 @@ module LMP
         turn == -128
       end
 
+      def next_frame
+        @next_frame || NilFrame.new
+      end
+
+      def prev_frame
+        @prev_frame || NilFrame.new
+      end
+
+      def frame_window(n)
+        prev_frames = [self]
+        n.times { prev_frames << prev_frames[-1].prev_frame }
+
+        next_frames = [self]
+        n.times { next_frames << next_frames[-1].next_frame }
+
+        prev_frames.reverse | next_frames
+      end
+
       private
+
+      def connect_frame(frame)
+        return if frame.nil?
+
+        @prev_frame = frame
+        frame.next_frame = self
+      end
 
       def get_signed_byte(file)
         [file.getbyte].pack('c').unpack('c')[0]
@@ -75,6 +102,19 @@ module LMP
 
       def event_value_at(a, b)
         event_bits[a..b].map(&:to_s).join.reverse.to_i(2)
+      end
+
+      class NilFrame < Frame
+        def initialize
+          @run = 0
+          @strafe = 0
+          @turn = 0
+          @pause = false
+          @save = false
+          @fire = false
+          @use = false
+          @weapon = false
+        end
       end
     end
   end
