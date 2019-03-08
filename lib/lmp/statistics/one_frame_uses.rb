@@ -1,24 +1,16 @@
 module LMP
   module Statistics
     class OneFrameUses < Base
+      STAT_NAME = 'One Frame Uses'
+
       def initialize
         @one_frame_uses = 0
         @use_count = 0
-        refresh
-      end
-
-      def refresh
-        @use_history = []
       end
 
       def analyze_frame(frame)
-        @use_history << frame.use
-
-        return if @use_history.length < 3
-
-        @one_frame_uses += 1 if one_frame_use?(frame)
-        @use_count += 1 if @use_history[1] && !frame.use
-        @use_history.shift
+        one_frame_use!(frame) if one_frame_use?(frame)
+        @use_count += 1 if frame.prev_frame.use && !frame.use
       end
 
       def print
@@ -28,7 +20,12 @@ module LMP
       private
 
       def one_frame_use?(frame)
-        !@use_history[0] && @use_history[1] && !frame.use
+        !frame.prev_frame.use && frame.use && !frame.next_frame.use
+      end
+
+      def one_frame_use!(frame)
+        @one_frame_uses += 1
+        capture_instance(frame)
       end
     end
   end
