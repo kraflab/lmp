@@ -8,32 +8,13 @@ module LMP
 
       def initialize
         @sudden_turns = {}
-        refresh
-      end
-
-      def refresh
-        @last_turn = nil
-        @ignore_frames = IGNORE_FRAMES
       end
 
       def analyze_frame(frame)
-        if @ignore_frames > 0
-          @ignore_frames -= 1
-          @last_turn = frame.turn
-          return
-        end
+        return if frame.index < IGNORE_FRAMES
 
-        if @last_turn == 0 && frame.turn.abs > IGNORE_LIMIT
-          sudden_turn_start!(frame.turn)
-          capture_instance(frame)
-        end
-
-        if @last_turn.abs > IGNORE_LIMIT && frame.turn == 0
-          sudden_turn_end!(@last_turn)
-          capture_instance(frame.prev_frame)
-        end
-
-        @last_turn = frame.turn
+        sudden_turn_start!(frame) if sudden_turn_start?(frame)
+        sudden_turn_end!(frame) if sudden_turn_end?(frame)
       end
 
       def print
@@ -46,14 +27,28 @@ module LMP
 
       private
 
-      def sudden_turn_start!(turn)
-        @sudden_turns[turn.abs] ||= { start: 0, end: 0 }
-        @sudden_turns[turn.abs][:start] += 1
+      def sudden_turn_start?(frame)
+        frame.prev_frame.turn == 0 &&
+          frame.turn.abs > IGNORE_LIMIT &&
+          frame.next_frame.turn != 0
       end
 
-      def sudden_turn_end!(turn)
-        @sudden_turns[turn.abs] ||= { start: 0, end: 0 }
-        @sudden_turns[turn.abs][:end] += 1
+      def sudden_turn_start!(frame)
+        @sudden_turns[frame.turn.abs] ||= { start: 0, end: 0 }
+        @sudden_turns[frame.turn.abs][:start] += 1
+        capture_instance(frame)
+      end
+
+      def sudden_turn_end?(frame)
+        frame.prev_frame.turn != 0 &&
+          frame.turn.abs > IGNORE_LIMIT &&
+          frame.next_frame.turn == 0
+      end
+
+      def sudden_turn_end!(frame)
+        @sudden_turns[frame.turn.abs] ||= { start: 0, end: 0 }
+        @sudden_turns[frame.turn.abs][:end] += 1
+        capture_instance(frame)
       end
     end
   end
