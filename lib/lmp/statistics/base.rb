@@ -1,7 +1,7 @@
 module LMP
   module Statistics
     class Base
-      VERBOSE_STAT_WINDOW = 1
+      VERBOSE_STAT_WINDOW = 2
       STAT_NAME = 'UNDEFINED'
 
       def refresh

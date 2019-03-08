@@ -1,33 +1,18 @@
 module LMP
   module Statistics
     class OneFrameTurns < Base
+      STAT_NAME = 'One Frame Turns'
       IGNORE_LIMIT = 9
       IGNORE_FRAMES = 1
 
       def initialize
         @one_frame_turns = {}
-        refresh
-      end
-
-      def refresh
-        @ignore_frames = IGNORE_FRAMES
-        @turn_history = []
       end
 
       def analyze_frame(frame)
-        @turn_history << frame.turn
+        return if frame.index < IGNORE_FRAMES
 
-        return if @turn_history.length < 3
-
-        if @ignore_frames > 0
-          @ignore_frames -= 1
-          @turn_history.shift
-          return
-        end
-
-        one_frame_turn!(@turn_history[1]) if one_frame_turn?(frame)
-
-        @turn_history.shift
+        one_frame_turn!(frame) if one_frame_turn?(frame)
       end
 
       def print
@@ -41,14 +26,15 @@ module LMP
       private
 
       def one_frame_turn?(frame)
-        @turn_history[0] == 0 &&
-          @turn_history[1].abs > IGNORE_LIMIT &&
-          frame.turn == 0
+        frame.prev_frame.turn == 0 &&
+          frame.turn.abs > IGNORE_LIMIT &&
+          frame.next_frame.turn == 0
       end
 
-      def one_frame_turn!(turn)
-        @one_frame_turns[turn.abs] ||= 0
-        @one_frame_turns[turn.abs] += 1
+      def one_frame_turn!(frame)
+        @one_frame_turns[frame.turn.abs] ||= 0
+        @one_frame_turns[frame.turn.abs] += 1
+        capture_instance(frame)
       end
     end
   end

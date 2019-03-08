@@ -2,7 +2,6 @@ module LMP
   module Statistics
     class SuddenTurns < Base
       STAT_NAME = 'Sudden Turns'
-      VERBOSE_STAT_WINDOW = 2
       IGNORE_LIMIT = 9
       IGNORE_FRAMES = 3
 
