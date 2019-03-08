@@ -1,6 +1,7 @@
 module LMP
   module Statistics
     class BadStraferun < Base
+      STAT_NAME = 'Bad Straferun'
       BAD_STRAFERUN_RANGE = 3
 
       def initialize
@@ -10,6 +11,7 @@ module LMP
 
       def analyze_frame(frame)
         if bad_straferun?(frame) && sr50_nearby?(frame)
+          capture_instance(frame)
           @bad_straferun[frame.strafe.abs] ||= 0
           @bad_straferun[frame.strafe.abs] += 1
           @cost += cost(frame.strafe.abs)

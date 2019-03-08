@@ -1,11 +1,13 @@
+require_relative 'frame_presenter'
+
 module LMP
   module Vanilla
     class Frame
-      attr_reader :run, :strafe, :turn,
+      attr_reader :run, :strafe, :turn, :index,
                   :event_bits, :pause, :save, :fire, :use, :weapon
       attr_writer :next_frame
 
-      def initialize(file, longtics, prev_frame)
+      def initialize(file, longtics, prev_frame, index)
         @run = get_signed_byte(file)
         return if end_of_frames?
         @strafe = get_signed_byte(file)
@@ -17,6 +19,7 @@ module LMP
         @weapon = false
         parse_events(file)
         connect_frame(prev_frame)
+        @index = index
       end
 
       def end_of_frames?
@@ -63,6 +66,10 @@ module LMP
         n.times { next_frames << next_frames[-1].next_frame }
 
         prev_frames.reverse | next_frames
+      end
+
+      def to_s
+        FramePresenter.call(self)
       end
 
       private
