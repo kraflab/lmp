@@ -7,6 +7,7 @@ module LMP
       @print_statistics = false
       @dump_frames = false
       @aggregate_stats = false
+      @turn_markov_chain = false
       parse(args)
     end
 
@@ -24,6 +25,10 @@ module LMP
 
     def aggregate_stats?
       @aggregate_stats
+    end
+
+    def turn_markov_chain?
+      @turn_markov_chain
     end
 
     private
@@ -52,6 +57,12 @@ module LMP
       end
     end
 
+    def turn_markov_chain_option(parser)
+      parser.on('--turn-markov-chain', 'Run turn markov chain analysis') do
+        @turn_markov_chain = true
+      end
+    end
+
     def help_option(parser)
       parser.on('-h', '--help', 'Print this help') do
         puts parser
@@ -73,6 +84,7 @@ module LMP
         print_statistics_option(parser)
         dump_frames_option(parser)
         aggregate_stats_option(parser)
+        turn_markov_chain_option(parser)
         explain_statistics_option(parser)
         help_option(parser)
       end.parse!(args)

@@ -7,6 +7,7 @@ require_relative 'lmp/options'
 require_relative 'lmp/presenter'
 require_relative 'lmp/statistics'
 require_relative 'lmp/explain_statistics'
+require_relative 'lmp/analysis'
 
 module LMP
   ENGINE = {

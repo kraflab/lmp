@@ -10,12 +10,22 @@ module ParseLMP
       demo = LMP.read(filename)
       stats = analyze(demo, options)
       print_analysis(demo, stats, options)
+      run_deep_analyses(demo, options)
     end
 
     print_aggregate_stats if options.aggregate_stats?
+    report_deep_analyses
   end
 
   private
+
+  def run_deep_analyses(demo, options)
+    LMP::Analysis.run(demo, options)
+  end
+
+  def report_deep_analyses
+    LMP::Analysis.report
+  end
 
   def analyze(demo, options)
     @stats = nil unless options.aggregate_stats?
