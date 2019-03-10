@@ -3,7 +3,7 @@ module LMP
     class OneFrameTurns < Base
       STAT_NAME = 'One Frame Turns'
       IGNORE_LIMIT = 9
-      IGNORE_FRAMES = 1
+      IGNORE_FRAMES = 2
 
       def initialize
         @one_frame_turns = {}
