@@ -1,5 +1,6 @@
 require_relative 'analysis/base'
 require_relative 'analysis/turn_markov_chain'
+require_relative 'analysis/turn_start_distribution'
 
 module LMP
   module Analysis
@@ -20,6 +21,7 @@ module LMP
     def initialize_analyses(options)
       @analyses = []
       @analyses << TurnMarkovChain.new if options.turn_markov_chain?
+      @analyses << TurnStartDistribution.new if options.turn_start_distribution?
     end
   end
 end

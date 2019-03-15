@@ -8,6 +8,7 @@ module LMP
       @dump_frames = false
       @aggregate_stats = false
       @turn_markov_chain = false
+      @turn_start_distribution = false
       parse(args)
     end
 
@@ -29,6 +30,10 @@ module LMP
 
     def turn_markov_chain?
       @turn_markov_chain
+    end
+
+    def turn_start_distribution?
+      @turn_start_distribution
     end
 
     private
@@ -63,6 +68,12 @@ module LMP
       end
     end
 
+    def turn_start_distribution_option(parser)
+      parser.on('--turn-start-distribution', 'Run turn start distribution analysis') do
+        @turn_start_distribution = true
+      end
+    end
+
     def help_option(parser)
       parser.on('-h', '--help', 'Print this help') do
         puts parser
@@ -85,6 +96,7 @@ module LMP
         dump_frames_option(parser)
         aggregate_stats_option(parser)
         turn_markov_chain_option(parser)
+        turn_start_distribution_option(parser)
         explain_statistics_option(parser)
         help_option(parser)
       end.parse!(args)
