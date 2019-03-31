@@ -24,7 +24,7 @@ module LMP
           'set view map',
           'set terminal pngcairo size 640, 640',
           'unset key',
-          "load 'viridis.pal'",
+          "load 'palettes/viridis.pal'",
           "set output '#{filename.gsub('txt', 'png')}'",
           "plot '#{filename}' u ($1-128):($2-128):($3) matrix with image"
         ]
