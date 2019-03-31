@@ -9,6 +9,7 @@ module LMP
       @aggregate_stats = false
       @turn_markov_chain = false
       @turn_start_distribution = false
+      @route_trace = false
       parse(args)
     end
 
@@ -34,6 +35,10 @@ module LMP
 
     def turn_start_distribution?
       @turn_start_distribution
+    end
+
+    def route_trace?
+      @route_trace
     end
 
     private
@@ -74,6 +79,12 @@ module LMP
       end
     end
 
+    def route_trace_option(parser)
+      parser.on('--route-trace', 'Trace the player route in the demo') do
+        @route_trace = true
+      end
+    end
+
     def help_option(parser)
       parser.on('-h', '--help', 'Print this help') do
         puts parser
@@ -97,6 +108,7 @@ module LMP
         aggregate_stats_option(parser)
         turn_markov_chain_option(parser)
         turn_start_distribution_option(parser)
+        route_trace_option(parser)
         explain_statistics_option(parser)
         help_option(parser)
       end.parse!(args)

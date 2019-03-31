@@ -1,6 +1,7 @@
 require_relative 'analysis/base'
 require_relative 'analysis/turn_markov_chain'
 require_relative 'analysis/turn_start_distribution'
+require_relative 'analysis/route_trace'
 
 module LMP
   module Analysis
@@ -22,6 +23,7 @@ module LMP
       @analyses = []
       @analyses << TurnMarkovChain.new if options.turn_markov_chain?
       @analyses << TurnStartDistribution.new if options.turn_start_distribution?
+      @analyses << RouteTrace.new if options.route_trace?
     end
   end
 end
