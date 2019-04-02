@@ -68,8 +68,8 @@ module LMP
         prev_frames.reverse | next_frames
       end
 
-      def to_s
-        FramePresenter.call(self)
+      def to_s(options = {})
+        FramePresenter.call(self, options)
       end
 
       private

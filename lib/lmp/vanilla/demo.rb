@@ -28,6 +28,10 @@ module LMP
         FramesPresenter.call(self)
       end
 
+      def dump_movement
+        FramesPresenter.call(self, movement_only: true)
+      end
+
       private
 
       def parse_file(file)

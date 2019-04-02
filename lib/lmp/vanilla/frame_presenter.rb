@@ -3,11 +3,13 @@ module LMP
     module FramePresenter
       extend self
 
-      def call(frame)
+      def call(frame, options = {})
         start = [
           formatted_index(frame.index),
           formatted_speeds(frame)
         ].join(' ')
+
+        return start if options[:movement_only]
 
         "#{start} | #{formatted_extra(frame)}"
       end

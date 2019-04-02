@@ -40,9 +40,9 @@ module ParseLMP
   def print_analysis(demo, stats, options)
     return if options.aggregate_stats?
 
-    puts '--- START ---'
+    puts '--- START ---' unless options.raw_data?
     LMP::Presenter.call(demo, stats, options)
-    puts '--- END ---'
+    puts '--- END ---' unless options.raw_data?
   end
 
   def print_aggregate_stats

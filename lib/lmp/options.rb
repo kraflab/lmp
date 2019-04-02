@@ -6,6 +6,7 @@ module LMP
       @print_details = false
       @print_statistics = false
       @dump_frames = false
+      @dump_movement = false
       @aggregate_stats = false
       @turn_markov_chain = false
       @turn_start_distribution = false
@@ -25,6 +26,10 @@ module LMP
       @dump_frames
     end
 
+    def dump_movement?
+      @dump_movement
+    end
+
     def aggregate_stats?
       @aggregate_stats
     end
@@ -39,6 +44,10 @@ module LMP
 
     def route_trace?
       @route_trace
+    end
+
+    def raw_data?
+      dump_movement? || dump_frames?
     end
 
     private
@@ -58,6 +67,12 @@ module LMP
     def dump_frames_option(parser)
       parser.on('-f', '--dump-frames', 'Dump demo frames') do
         @dump_frames = true
+      end
+    end
+
+    def dump_movement_option(parser)
+      parser.on('-m', '--dump-movement', 'Dump demo frames (only movement)') do
+        @dump_movement = true
       end
     end
 
@@ -105,6 +120,7 @@ module LMP
         print_details_option(parser)
         print_statistics_option(parser)
         dump_frames_option(parser)
+        dump_movement_option(parser)
         aggregate_stats_option(parser)
         turn_markov_chain_option(parser)
         turn_start_distribution_option(parser)

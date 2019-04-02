@@ -3,10 +3,10 @@ module LMP
     module FramesPresenter
       extend self
 
-      def call(demo)
-        puts 'Frame Run Strafe Turn Extra'
+      def call(demo, options = {})
+        puts 'Frame Run Strafe Turn Extra' unless options[:dump_movement]
         demo.frames.each do |frame|
-          puts frame.to_s
+          puts frame.to_s(options)
         end
       end
     end
