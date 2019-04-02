@@ -10,6 +10,7 @@ module LMP
       def report(filename_root)
         filename = filename_root + self.class::ANALYSIS_NAME + '.txt'
         file = File.open(filename, 'w')
+        puts "Writing analysis to #{filename}"
         report_to(file)
       end
     end
