@@ -7,8 +7,6 @@ class DataFile
   end
 
   def angle_between(other)
-    return 0 if self == other
-
     Math.acos(data.sum { |k, v| v * (other.data[k] || 0) }).round(3)
   end
 
@@ -27,6 +25,8 @@ files = ARGV.map { |name| DataFile.new(name) }
 
 files.each do |file1|
   files.each do |file2|
+    next if file1 == file2
+
     puts(
       file1.name + " " + file2.name + " " + file1.angle_between(file2).to_s
     )
