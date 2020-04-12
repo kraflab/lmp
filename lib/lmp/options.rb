@@ -12,6 +12,7 @@ module LMP
       @turn_start_distribution = false
       @route_trace = false
       @turn_frequency = false
+      @vector_fingerprint = false
       parse(args)
     end
 
@@ -49,6 +50,10 @@ module LMP
 
     def turn_frequency?
       @turn_frequency
+    end
+
+    def vector_fingerprint?
+      @vector_fingerprint
     end
 
     def raw_data?
@@ -111,6 +116,12 @@ module LMP
       end
     end
 
+    def vector_fingerprint_option(parser)
+      parser.on('--vector-fingerprint', 'Run vector fingerprint analysis') do
+        @vector_fingerprint = true
+      end
+    end
+
     def help_option(parser)
       parser.on('-h', '--help', 'Print this help') do
         puts parser
@@ -137,6 +148,7 @@ module LMP
         turn_start_distribution_option(parser)
         route_trace_option(parser)
         turn_frequency_option(parser)
+        vector_fingerprint_option(parser)
         explain_statistics_option(parser)
         help_option(parser)
       end.parse!(args)

@@ -3,6 +3,7 @@ require_relative 'analysis/turn_markov_chain'
 require_relative 'analysis/turn_start_distribution'
 require_relative 'analysis/route_trace'
 require_relative 'analysis/turn_frequency'
+require_relative 'analysis/vector_fingerprint'
 
 module LMP
   module Analysis
@@ -26,6 +27,7 @@ module LMP
       @analyses << TurnStartDistribution.new if options.turn_start_distribution?
       @analyses << RouteTrace.new if options.route_trace?
       @analyses << TurnFrequency.new if options.turn_frequency?
+      @analyses << VectorFingerprint.new if options.vector_fingerprint?
     end
   end
 end
