@@ -4,7 +4,7 @@ module LMP
   module Vanilla
     class Frame
       attr_reader :run, :strafe, :turn, :index,
-                  :event_bits, :pause, :save, :fire, :use, :weapon
+                  :events, :event_bits, :pause, :save, :fire, :use, :weapon
       attr_writer :next_frame
 
       def initialize(file, longtics, prev_frame, index)
@@ -12,11 +12,6 @@ module LMP
         return if end_of_frames?
         @strafe = get_signed_byte(file)
         @turn = read_turn(file, longtics)
-        @pause = false
-        @save = false
-        @fire = false
-        @use = false
-        @weapon = false
         parse_events(file)
         connect_frame(prev_frame)
         @index = index
@@ -72,6 +67,13 @@ module LMP
         FramePresenter.call(self, options)
       end
 
+      def to_i
+        ((run & 255) << 24) \
+        + ((strafe & 255) << 16) \
+        + ((turn & 255) << 8) \
+        + events
+      end
+
       private
 
       def connect_frame(frame)
@@ -91,7 +93,12 @@ module LMP
       end
 
       def parse_events(file)
-        events = file.getbyte
+        @pause = false
+        @save = false
+        @fire = false
+        @use = false
+        @weapon = false
+        @events = file.getbyte
         @event_bits = events.to_s(2).reverse.chars.map(&:to_i)
         event_bits[7] ? parse_special : parse_nonspecial
       end
@@ -121,6 +128,7 @@ module LMP
           @fire = false
           @use = false
           @weapon = false
+          @events = 0
         end
       end
     end
