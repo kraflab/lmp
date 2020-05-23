@@ -7,7 +7,7 @@ module ParseLMP
     options = LMP::Options.new(args)
     filenames = args
     filenames.each do |filename|
-      demo = LMP.read(filename)
+      demo = LMP.read(filename, options)
       stats = analyze(demo, options)
       print_analysis(demo, stats, options)
       run_deep_analyses(demo, options)

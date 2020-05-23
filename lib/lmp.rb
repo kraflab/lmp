@@ -3,6 +3,7 @@ require_relative 'lmp/vanilla/demo'
 require_relative 'lmp/boom'
 require_relative 'lmp/mbf'
 require_relative 'lmp/doom'
+require_relative 'lmp/heretic'
 require_relative 'lmp/options'
 require_relative 'lmp/presenter'
 require_relative 'lmp/statistics'
@@ -13,12 +14,12 @@ module LMP
   ENGINE = {
     doom: Doom,
     boom: Boom,
-    mbf: MBF
+    mbf: MBF,
+    heretic: Heretic
   }.freeze
 
   extend self
 
-  def read(filename)
   def read(filename, options)
     engine = LMP::Engine.detect(filename)
     engine = options.engine if engine == :unknown
