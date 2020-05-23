@@ -22,14 +22,6 @@ module LMP
 
       private
 
-      def parse_players(file)
-        @player_1 = file.getbyte
-        @player_2 = file.getbyte
-        @player_3 = file.getbyte
-        @player_4 = file.getbyte
-        file.read(28) # extra players
-      end
-
       def parse_details(file)
         parse_boom_details(file)
         parse_mbf_details(file)
