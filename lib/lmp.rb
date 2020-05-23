@@ -19,7 +19,17 @@ module LMP
   extend self
 
   def read(filename)
+  def read(filename, options)
     engine = LMP::Engine.detect(filename)
+    engine = options.engine if engine == :unknown
+
+    bad_engine(filename) unless ENGINE[engine]
+
     ENGINE[engine].read(filename)
+  end
+
+  def bad_engine(filename)
+    puts "Unknown engine for #{filename}. Aborting..."
+    exit
   end
 end

@@ -13,7 +13,12 @@ module LMP
       @route_trace = false
       @turn_frequency = false
       @vector_fingerprint = false
+      @engine = nil
       parse(args)
+    end
+
+    def engine
+      @engine
     end
 
     def print_details?
@@ -122,6 +127,12 @@ module LMP
       end
     end
 
+    def engine_option(parser)
+      parser.on('--engine=ENGINE', 'Manually set engine (heretic)') do |engine|
+        @engine = engine.to_sym
+      end
+    end
+
     def help_option(parser)
       parser.on('-h', '--help', 'Print this help') do
         puts parser
@@ -150,6 +161,7 @@ module LMP
         turn_frequency_option(parser)
         vector_fingerprint_option(parser)
         explain_statistics_option(parser)
+        engine_option(parser)
         help_option(parser)
       end.parse!(args)
     end
