@@ -128,7 +128,7 @@ module LMP
     end
 
     def engine_option(parser)
-      parser.on('--engine=ENGINE', 'Manually set engine (heretic)') do |engine|
+      parser.on('--engine=ENGINE', 'Manually set engine (heretic / hexen)') do |engine|
         @engine = engine.to_sym
       end
     end
