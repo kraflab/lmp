@@ -4,6 +4,7 @@ require_relative 'lmp/boom'
 require_relative 'lmp/mbf'
 require_relative 'lmp/doom'
 require_relative 'lmp/heretic'
+require_relative 'lmp/hexen'
 require_relative 'lmp/options'
 require_relative 'lmp/presenter'
 require_relative 'lmp/statistics'
@@ -15,7 +16,8 @@ module LMP
     doom: Doom,
     boom: Boom,
     mbf: MBF,
-    heretic: Heretic
+    heretic: Heretic,
+    hexen: Hexen
   }.freeze
 
   extend self
