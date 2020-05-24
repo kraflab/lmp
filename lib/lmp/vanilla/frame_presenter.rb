@@ -1,26 +1,35 @@
 module LMP
   module Vanilla
-    module FramePresenter
-      extend self
+    class FramePresenter
+      def self.call(frame, options = {})
+        new(frame, options).call
+      end
 
-      def call(frame, options = {})
+      def initialize(frame, options = {})
+        @frame = frame
+        @options = options
+      end
+
+      def call
         start = [
-          formatted_index(frame.index),
-          formatted_speeds(frame)
+          formatted_index,
+          formatted_speeds
         ].join(' ')
 
         return start if options[:movement_only]
 
-        "#{start} | #{formatted_extra(frame)}"
+        "#{start} | #{formatted_extra}"
       end
 
       private
 
-      def formatted_index(index)
-        index = index.to_s.rjust(5)
+      attr_reader :frame, :options
+
+      def formatted_index
+        frame.index.to_s.rjust(5)
       end
 
-      def formatted_speeds(frame)
+      def formatted_speeds
         [
           frame.run,
           frame.strafe,
@@ -28,16 +37,20 @@ module LMP
         ].map { |x| x.to_s.rjust(4) }.join(' ')
       end
 
-      def formatted_extra(frame)
-        extra = [
+      def formatted_extra
+        extra = extra_fields.reject(&:nil?).join(' ')
+
+        extra.length > 0 ? extra : '-'
+      end
+
+      def extra_fields
+        [
           frame.pause ? 'pause' : nil,
           frame.save ? 'save' : nil,
           frame.fire ? 'fire' : nil,
           frame.use ? 'use' : nil,
           frame.weapon ? "weapon(#{frame.weapon})" : nil
-        ].reject(&:nil?).join(' ')
-
-        extra.length > 0 ? extra : '-'
+        ]
       end
     end
   end
