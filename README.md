@@ -2,7 +2,7 @@
 
 This is a small tool for analyzing `.lmp` demo files, which are produced by the classic 90s fps Doom and its offspring source ports. The analyzer can handle vanilla **doom**, **boom**, and **mbf** formats currently.
 
-Support for heretic is available but experimental. You need to manually set the format with `--engine=heretic` since heretic predates versioned lmp formats.
+Support for heretic & hexen is available but experimental. You need to manually set the format with `--engine=heretic` or `--engine=hexen` since these games did not use a versioned lmp format.
 
 Run the analyzer with `ruby parse_lmp.rb -h` for basic usage instructions.
 
