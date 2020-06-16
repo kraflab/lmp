@@ -3,7 +3,7 @@ require_relative 'frame_presenter'
 module LMP
   module Vanilla
     class Frame
-      attr_reader :run, :strafe, :turn, :index,
+      attr_reader :run, :strafe, :turn, :index, :join,
                   :events, :event_bits, :pause, :save, :fire, :use, :weapon
       attr_writer :next_frame
 
@@ -101,6 +101,7 @@ module LMP
         @events = file.getbyte
         @event_bits = events.to_s(2).reverse.chars.map(&:to_i)
         event_bits[7] ? parse_special : parse_nonspecial
+        @join = event_bits[6] == 1
       end
 
       def parse_special
@@ -129,6 +130,7 @@ module LMP
           @use = false
           @weapon = false
           @events = 0
+          @join = false
         end
       end
     end

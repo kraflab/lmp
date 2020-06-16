@@ -45,6 +45,7 @@ module LMP
 
       def extra_fields
         [
+          frame.join ? 'join' : nil,
           frame.pause ? 'pause' : nil,
           frame.save ? 'save' : nil,
           frame.fire ? 'fire' : nil,
