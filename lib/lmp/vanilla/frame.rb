@@ -101,7 +101,7 @@ module LMP
         @events = file.getbyte
         @event_bits = events.to_s(2).reverse.chars.map(&:to_i)
         event_bits[7] ? parse_special : parse_nonspecial
-        @join = event_bits[6] == 1
+        @join = (event_bits[6] == 1 && !weapon)
       end
 
       def parse_special
