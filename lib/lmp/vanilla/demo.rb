@@ -36,6 +36,7 @@ module LMP
 
       def parse_file(file)
         @version = file.getbyte
+        strip_255_wrapper(file)
         @longtics = longtics?
         parse_details(file)
         parse_players(file)
@@ -61,6 +62,13 @@ module LMP
 
       def read_play_mode(file)
         PLAY_MODE.fetch(file.getbyte, 'unknown')
+      end
+
+      def strip_255_wrapper(file)
+        if version == 255
+          file.read(26)
+          @version = file.getbyte
+        end
       end
 
       def longtics?
