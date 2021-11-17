@@ -64,7 +64,8 @@ module LMP
       end
 
       def longtics?
-        @version == 214 ||
+        @version == 221 ||
+          @version == 214 ||
           (@version > 110 && @version < 200)
       end
     end

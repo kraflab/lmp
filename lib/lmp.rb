@@ -2,6 +2,7 @@ require_relative 'lmp/engine'
 require_relative 'lmp/vanilla/demo'
 require_relative 'lmp/boom'
 require_relative 'lmp/mbf'
+require_relative 'lmp/mbf21'
 require_relative 'lmp/doom'
 require_relative 'lmp/heretic'
 require_relative 'lmp/hexen'
@@ -16,6 +17,7 @@ module LMP
     doom: Doom,
     boom: Boom,
     mbf: MBF,
+    mbf21: MBF21,
     heretic: Heretic,
     hexen: Hexen
   }.freeze
